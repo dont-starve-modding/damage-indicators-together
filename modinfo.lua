@@ -1,7 +1,7 @@
 name = "Damage Indicators"
 description = "Baaaaam Baam. Take that, nasty brute of hell!"
 author = "s1m13, ported by DarkXero"
-version = "0.69"
+version = "0.6.10"
 forumthread = "/topic/30774-mod-idea-damage-indicator/"
 api_version = 10
 dont_starve_compatible = false
@@ -67,4 +67,15 @@ configuration_options =
       default = "no",
 
     },
+    
+    {
+      name = "number_size",
+      label = "Number size",
+      options = {
+        {description = "Tiny", data = "tiny"},
+        {description = "Default", data = "default"},
+        {description = "Huge", data = "huge"},      
+      },
+	default = "default",
+    }
   }

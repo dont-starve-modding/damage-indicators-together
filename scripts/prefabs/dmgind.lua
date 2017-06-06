@@ -69,7 +69,7 @@ local function CreateDamageIndicator(inst)
 				dside = -dside
 			end
 			ddside = 0.0
-			-----------------------------
+			-------------------------------------
 		end
 
 		while inst:IsValid() and t < t_max do
@@ -82,11 +82,11 @@ local function CreateDamageIndicator(inst)
 				ddside = -side * math.random() * TUNING.SIDE_WAVE_RND
 				dside = dside + ddside
 				side = side + dside
-				-------------------------------------
+				--------------------------------------
 			end
 
 			if TUNING.DISPLAY_MODE == 'bouncy' then
-				-- bounce around mode ---------------
+				-- bounce around mode ----------------
 				ddy = -TUNING.GRAVITY
 				dy = dy + ddy
 				y = y + dy
@@ -98,7 +98,7 @@ local function CreateDamageIndicator(inst)
 				ddside = 0
 				dside = dside + ddside
 				side = side + dside
-				-------------------------------------
+				--------------------------------------
 			end
 
 			local headingtarget = 45 --[[TheCamera.headingtarget]] % 180
@@ -109,7 +109,7 @@ local function CreateDamageIndicator(inst)
 			elseif headingtarget == 90 then
 				label:SetWorldOffset(side, y, 0)		-- from 3d plane z = 0
 			elseif headingtarget == 135 then
-				label:SetWorldOffset(side, y, side)		-- from 3d plane z - x = 0
+				label:SetWorldOffset(side, y, side)     -- from 3d plane z - x = 0
 			end
 			t = t + dt
 			label:SetFontSize( TUNING.LABEL_FONT_SIZE * math.sqrt(1 - t / t_max))
@@ -126,7 +126,7 @@ local function SetNumberSign(inst)
 	inst.sign = inst.isheal:value() and 1 or -1
 end
 
-local function fn()
+local function InitDI()
 	local inst = CreateEntity()
 	inst.entity:AddTransform()
 	inst.entity:AddNetwork()
@@ -150,4 +150,4 @@ local function fn()
 	return inst
 end
 
-return Prefab("dmgind", fn)
+return Prefab("dmgind", InitDI)

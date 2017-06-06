@@ -20,6 +20,14 @@ TUNING.SHOW_DECIMAL_POINTS = GetModConfigData("show_decimal_points")
 
 TUNING.DISPLAY_MODE = GetModConfigData("display_mode")
 
+TUNING.LABEL_FONT_SIZE = 70
+if(GetModConfigData("number_size") == "tiny") then
+  TUNING.LABEL_FONT_SIZE = 40
+end
+if(GetModConfigData("number_size") == "huge") then
+  TUNING.LABEL_FONT_SIZE = 100
+end
+
 ----------------------------------------------------
 
 
@@ -34,8 +42,6 @@ TUNING.HEALTH_GAIN_COLOR = {
 	b = 0
 }
 
-
-TUNING.LABEL_FONT_SIZE = 70
 
 TUNING.LABEL_Y_START = 4
 
