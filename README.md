@@ -14,13 +14,12 @@ Such Red. Less Green. Much ouch. So Bääääm. WOW
 * Decimal points: "1.3333", "1.3" or simply "1"
 * Number size
 
-
 #### This is the DST-version. This is *not* a client-only mod. It's a Server *and* Client mod.
+
+Special thanks to DarkXero!
 
 ### Steam
 http://steamcommunity.com/sharedfiles/filedetails/?id=220511926
-
-Special thanks to DarkXero!
 
 Requested by: HexicTheory http://forums.kleientertainment.com/topic/58723-requesthelp-porting-ds-mod-to-dst/
 
