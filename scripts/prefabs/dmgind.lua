@@ -1,19 +1,19 @@
 local function CreateDamageIndicator(inst)
-	local amount = inst.sign * (inst.indicator:value() or 0)
+    local amount = inst.sign * (inst.indicator:value() or 0)
 
 	local label = inst.entity:AddLabel()
 	label:SetFont(NUMBERFONT)
 	label:SetFontSize(TUNING.LABEL_FONT_SIZE)
 	label:SetWorldOffset(0, TUNING.LABEL_Y_START, 0)
 
-	local color
-	if amount < 0 then
-		color = TUNING.HEALTH_LOSE_COLOR
-	else
-		color = TUNING.HEALTH_GAIN_COLOR
-	end
+    local color
+    if amount < 0 then
+        color = TUNING.HEALTH_LOSE_COLOR
+    else
+        color = TUNING.HEALTH_GAIN_COLOR
+    end
 
-	label:SetColour(color.r, color.g, color.b)
+    label:SetColour(color.r, color.g, color.b)
 
 	local dp_no = "%d";
 	local dp_yes = "%.1f";
@@ -28,10 +28,7 @@ local function CreateDamageIndicator(inst)
 		format = dp_yes
 	end
 
-
-
 	label:SetText(string.format(format, amount))
-	--label:SetText( ("%d.1f"):format(amount) )  -- wanna have .x ?
 
 	label:Enable(true)
 
@@ -122,8 +119,17 @@ local function CreateDamageIndicator(inst)
 	end)
 end
 
+local function SetNumber(inst)
+	if inst.sign ~= 0 then
+		CreateDamageIndicator(inst)
+	end
+end
+
 local function SetNumberSign(inst)
 	inst.sign = inst.isheal:value() and 1 or -1
+	if inst.indicator then
+		CreateDamageIndicator(inst)
+	end
 end
 
 local function InitDI()
@@ -131,13 +137,13 @@ local function InitDI()
 	inst.entity:AddTransform()
 	inst.entity:AddNetwork()
 
-	inst.sign = -1
+	inst.sign = 0
 
 	inst.isheal = net_bool(inst.GUID, "dmgind.sign", "signdirty")
 	inst:ListenForEvent("signdirty", SetNumberSign)
 
 	inst.indicator = net_byte(inst.GUID, "dmgind.number", "numberdirty")
-	inst:ListenForEvent("numberdirty", CreateDamageIndicator)
+	inst:ListenForEvent("numberdirty", SetNumber)
 
 	inst.entity:SetPristine()
 
