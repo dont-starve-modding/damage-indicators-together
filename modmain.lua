@@ -59,11 +59,19 @@ TUNING.LABEL_Y_START_VELO = 0.05
 TUNING.LABEL_MIN_AMPLITUDE_X = 0.8
 TUNING.LABEL_MAX_AMPLITUDE_X = 1.6
 
-
 AddComponentPostInit("health", function(Health, inst)
     inst:ListenForEvent("healthdelta", function(inst, data)
         if inst.components.health then
-            local amount = (data.newpercent - data.oldpercent) * inst.components.health.maxhealth
+            local amount = data.newpercent * inst.components.health.maxhealth - data.oldpercent * inst.components.health.maxhealth
+
+            if data.amount and math.abs(data.amount) < math.abs(amount) then
+                amount = data.amount
+            end
+
+            if amount == 0 then
+                return
+            end
+
             if math.abs(amount) > TUNING.SHOW_NUMBERS_THRESHOLD then
                 if not (TUNING.SHOW_DAMAGE_ONLY and amount > 0) then
                     local CDI = GLOBAL.SpawnPrefab("dmgind")

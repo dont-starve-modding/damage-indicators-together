@@ -142,7 +142,7 @@ local function InitDI()
     inst.isheal = net_bool(inst.GUID, "dmgind.sign", "signdirty")
     inst:ListenForEvent("signdirty", SetNumberSign)
 
-    inst.indicator = net_byte(inst.GUID, "dmgind.number", "numberdirty")
+    inst.indicator = net_ushortint(inst.GUID, "dmgind.number", "numberdirty")
     inst:ListenForEvent("numberdirty", SetNumber)
 
     inst.entity:SetPristine()
