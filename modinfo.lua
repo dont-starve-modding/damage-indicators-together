@@ -1,7 +1,7 @@
 name = "Damage Indicators Together"
 description = "Baaaaam Baam. Take that, nasty brute of hell!"
 author = "s1m13, ported by DarkXero"
-version = "0.6.10"
+version = "0.6.11"
 forumthread = "/topic/30774-mod-idea-damage-indicator/"
 api_version = 10
 dont_starve_compatible = false
