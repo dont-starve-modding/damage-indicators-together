@@ -18,6 +18,17 @@ Such Red. Less Green. Much ouch. So Bääääm. WOW
 
 Special thanks to DarkXero for porting this mod to DST! ([profile](http://forums.kleientertainment.com/user/537485-darkxero/]))
 
+### FAQ
+
+#### The numbers are too large. What can I do?
+Change the settings "Number size" to "Tiny"
+
+#### Something is not working as expected. Where can I submit an error?
+Here: https://github.com/dont-starve-modding/damage-indicators-together/issues/new
+
+#### Sometimes I see 0 or 0.0 when being healed or damaged. Is this correct?
+It can happen that the actual value of healing or damage can be rounded down to 0. So you can assume that the dealt damage or applied healing is: |x| < 0.5
+
 ### Steam
 http://steamcommunity.com/sharedfiles/filedetails/?id=220511926
 
