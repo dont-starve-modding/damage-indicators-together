@@ -1,4 +1,4 @@
-name = "Damage Indicators"
+name = "Damage Indicators Together"
 description = "Baaaaam Baam. Take that, nasty brute of hell!"
 author = "s1m13, ported by DarkXero"
 version = "0.6.10"
