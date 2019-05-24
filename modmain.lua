@@ -21,6 +21,9 @@ TUNING.SHOW_DECIMAL_POINTS = GetModConfigData("show_decimal_points")
 TUNING.DISPLAY_MODE = GetModConfigData("display_mode")
 
 TUNING.LABEL_FONT_SIZE = 70
+if (GetModConfigData("number_size") == "atomic") then
+    TUNING.LABEL_FONT_SIZE = 20
+end
 if (GetModConfigData("number_size") == "tiny") then
     TUNING.LABEL_FONT_SIZE = 40
 end
@@ -58,6 +61,11 @@ TUNING.LABEL_Y_START_VELO = 0.05
 
 TUNING.LABEL_MIN_AMPLITUDE_X = 0.8
 TUNING.LABEL_MAX_AMPLITUDE_X = 1.6
+
+TUNING.SCALE_WITH_DAMAGE = 1
+if (GetModConfigData("size_scale") == "no") then
+    TUNING.SCALE_WITH_DAMAGE = 0 
+end
 
 AddComponentPostInit("health", function(Health, inst)
     inst:ListenForEvent("healthdelta", function(inst, data)

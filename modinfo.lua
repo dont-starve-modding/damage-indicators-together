@@ -64,9 +64,20 @@ configuration_options =
         name = "number_size",
         label = "Number size",
         options = {
+            { description = "Atomic", data = "atomic" },            
             { description = "Tiny", data = "tiny" },
             { description = "Default", data = "default" },
             { description = "Huge", data = "huge" },
+        },
+        default = "default",
+    },
+
+    {
+        name = "size_scale",
+        label = "Scale number size with damage",
+        options = {
+            { description = "Yes", data = "default" },
+            { description = "No", data = "no" },
         },
         default = "default",
     }

@@ -8,7 +8,10 @@ local function CreateDamageIndicator(inst)
     -- Which leads to nearly f(0) = 0.5, f(5) = 1, f(100) = 5
     -- This means, lower numbers are half that small than numbers around 5
     -- and 100 damage or heal is 5 times as big as a damage of 5
-    local size = 0.5+(math.log(absAmount+1))/9+(absAmount*absAmount)/2500;
+    local size = (0.5+(math.log(absAmount+1))/9+(absAmount*absAmount)/2500);
+    if TUNING.SCALE_WITH_DAMAGE == 0 then
+        size = 1
+    end 
     
     label:SetFont(NUMBERFONT)
     label:SetFontSize(TUNING.LABEL_FONT_SIZE * size)
