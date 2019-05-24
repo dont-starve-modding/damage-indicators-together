@@ -1,7 +1,7 @@
 name = "Damage Indicators Together"
 description = "Baaaaam Baam. Take that, nasty brute of hell!"
 author = "s1m13, ported by DarkXero"
-version = "0.8.1"
+version = "0.8.2"
 forumthread = "/topic/87910-damage-indicators-together/"
 api_version = 10
 dont_starve_compatible = false
@@ -76,8 +76,8 @@ configuration_options =
         name = "size_scale",
         label = "Scale number size with damage",
         options = {
-            { description = "Yes", data = "default" },
-            { description = "No", data = "no" },
+            { description = "On", data = "default" },
+            { description = "Off", data = "off" },
         },
         default = "default",
     }

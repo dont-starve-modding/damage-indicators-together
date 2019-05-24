@@ -63,7 +63,7 @@ TUNING.LABEL_MIN_AMPLITUDE_X = 0.8
 TUNING.LABEL_MAX_AMPLITUDE_X = 1.6
 
 TUNING.SCALE_WITH_DAMAGE = 1
-if (GetModConfigData("size_scale") == "no") then
+if (GetModConfigData("size_scale") == "off") then
     TUNING.SCALE_WITH_DAMAGE = 0 
 end
 
