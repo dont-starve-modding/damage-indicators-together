@@ -1,9 +1,18 @@
 local function CreateDamageIndicator(inst)
     local amount = inst.sign * (inst.indicator:value() or 0)
+    local absAmount = math.abs(amount);
 
     local label = inst.entity:AddLabel()
+
+    -- size = 0.5+ln(x)/9+x*x/2500
+    -- Which leads to nearly f(0) = 0.5, f(5) = 1, f(100) = 5
+    -- This means, lower numbers are half that small than numbers around 5
+    -- and 100 damage or heal is 5 times as big as a damage of 5
+    local size = 0.5+(math.log(absAmount+1))/9+(absAmount*absAmount)/2500;
+    
     label:SetFont(NUMBERFONT)
-    label:SetFontSize(TUNING.LABEL_FONT_SIZE)
+    label:SetFontSize(TUNING.LABEL_FONT_SIZE * size)
+
     label:SetWorldOffset(0, TUNING.LABEL_Y_START, 0)
 
     local color
@@ -109,7 +118,7 @@ local function CreateDamageIndicator(inst)
                 label:SetWorldOffset(side, y, side) -- from 3d plane z - x = 0
             end
             t = t + dt
-            label:SetFontSize(TUNING.LABEL_FONT_SIZE * math.sqrt(1 - t / t_max))
+            label:SetFontSize(TUNING.LABEL_FONT_SIZE * size * math.sqrt(1 - t / t_max))
             Sleep(dt)
         end
 
