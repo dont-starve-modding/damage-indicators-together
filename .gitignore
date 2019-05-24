@@ -45,3 +45,4 @@ luac.out
 .gitignore
 .idea/
 damage-indicators-together-0.6.10.zip
+build/
