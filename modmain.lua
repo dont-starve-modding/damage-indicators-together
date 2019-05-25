@@ -2,6 +2,7 @@ PrefabFiles = {
     "dmgind",
     "hngind",
     "sanind",
+    "bvnind",
     "wrkind"
 }
 
@@ -73,6 +74,17 @@ TUNING.WORK_COLOR = {
     b = 1
 }
 
+TUNING.BEAVERNESS_GAIN_COLOR = {
+    r = 0.8,
+    g = 0.8,
+    b = 0.8
+}
+TUNING.BEAVERNESS_LOSE_COLOR = {
+    r = 0.8,
+    g = 0.8,
+    b = 0.8
+}
+
 TUNING.LABEL_Y_START = 4
 
 TUNING.LABEL_TIME = 1.0
@@ -101,6 +113,7 @@ end
 
 TUNING.SHOW_HUNGER_INDICATORS = GetModConfigData("show_hunger") == "on"
 TUNING.SHOW_SANITY_INDICATORS = GetModConfigData("show_sanity") == "on"
+TUNING.SHOW_BEAVERNESS_INDICATORS = GetModConfigData("show_beaverness") == "on"
 TUNING.SHOW_WORK_INDICATORS = GetModConfigData("show_work") == "on"
 
 AddComponentPostInit("health", function(Health, inst)
@@ -176,6 +189,31 @@ AddComponentPostInit("sanity", function(Sanity, inst)
                 sanityindicator.isheal:set(amount >= 0)
                 sanityindicator.indicator:set_local(0)
                 sanityindicator.indicator:set(math.abs(amount))
+            end
+        end
+    end)
+end)
+
+AddComponentPostInit("beaverness", function(Sanity, inst)
+    inst:ListenForEvent("beavernessdelta", function(inst, data)
+        if inst.components.beaverness then
+            local amount = data.newpercent * inst.components.beaverness.max - data.oldpercent * inst.components.beaverness.max
+
+            if data.amount and math.abs(data.amount) < math.abs(amount) then
+                amount = data.amount
+            end
+
+            if amount == 0 then
+                return
+            end
+
+            if TUNING.SHOW_BEAVERNESS_INDICATORS and math.abs(amount) > TUNING.SHOW_NUMBERS_THRESHOLD then
+                local beavernessindicator = GLOBAL.SpawnPrefab("bvnind")
+                beavernessindicator.Transform:SetPosition(inst.Transform:GetWorldPosition())
+                beavernessindicator.isheal:set_local(false)
+                beavernessindicator.isheal:set(amount >= 0)
+                beavernessindicator.indicator:set_local(0)
+                beavernessindicator.indicator:set(math.abs(amount))
             end
         end
     end)
