@@ -1,5 +1,7 @@
 PrefabFiles = {
     "dmgind",
+    "hngind",
+    "sanind"
 }
 
 
@@ -15,6 +17,8 @@ end
 if GetModConfigData("amount_of_numbers") == "low" then
     TUNING.SHOW_NUMBERS_THRESHOLD = 0.99
 end
+
+TUNING.SHOW_HUNGER_NUMBERS_THRESHOLD = 0
 
 TUNING.SHOW_DECIMAL_POINTS = GetModConfigData("show_decimal_points")
 
@@ -45,6 +49,23 @@ TUNING.HEALTH_GAIN_COLOR = {
     b = 0
 }
 
+TUNING.HUNGER_GAIN_COLOR = {
+    r = 0.7,
+    g = 0.8,
+    b = 0
+}
+
+TUNING.SANITY_LOSE_COLOR = {
+    r = 0.3,
+    g = 0.3,
+    b = 0.3
+}
+TUNING.SANITY_GAIN_COLOR = {
+    r = 0.7,
+    g = 0,
+    b = 0.9
+}
+
 
 TUNING.LABEL_Y_START = 4
 
@@ -60,7 +81,7 @@ TUNING.SIDE_WAVE_RND = 0.15
 TUNING.LABEL_Y_START_VELO = 0.05
 
 TUNING.LABEL_MIN_AMPLITUDE_X = 0.8
-TUNING.LABEL_MAX_AMPLITUDE_X = 1.6
+TUNING.LABEL_MAX_AMPLITUDE_X = 2.2
 
 TUNING.ROCKET_M0 = 100              -- whole mass of the rocket
 TUNING.ROCKET_MF = 10               -- propellor mass
@@ -71,6 +92,9 @@ TUNING.SCALE_WITH_DAMAGE = 1
 if (GetModConfigData("size_scale") == "off") then
     TUNING.SCALE_WITH_DAMAGE = 0 
 end
+
+TUNING.SHOW_HUNGER_INDICATORS = GetModConfigData("show_hunger") == "on"
+TUNING.SHOW_SANITY_INDICATORS = GetModConfigData("show_sanity") == "on"
 
 AddComponentPostInit("health", function(Health, inst)
     inst:ListenForEvent("healthdelta", function(inst, data)
@@ -94,6 +118,57 @@ AddComponentPostInit("health", function(Health, inst)
                     CDI.indicator:set_local(0)
                     CDI.indicator:set(math.abs(amount))
                 end
+            end
+        end
+    end)
+end)
+
+AddComponentPostInit("hunger", function(Hunger, inst)
+    inst:ListenForEvent("hungerdelta", function(inst, data)
+        if inst.components.hunger then
+            local amount = data.newpercent * inst.components.hunger.max - data.oldpercent * inst.components.hunger.max
+
+            if data.amount and math.abs(data.amount) < math.abs(amount) then
+                amount = data.amount
+            end
+
+            if amount == 0 then
+                return
+            end
+
+            if TUNING.SHOW_HUNGER_INDICATORS and amount > TUNING.SHOW_HUNGER_NUMBERS_THRESHOLD then
+                local hungerindicator = GLOBAL.SpawnPrefab("hngind")
+                hungerindicator.Transform:SetPosition(inst.Transform:GetWorldPosition())
+                hungerindicator.isheal:set_local(false)
+                hungerindicator.isheal:set(amount >= 0)
+                hungerindicator.indicator:set_local(0)
+                hungerindicator.indicator:set(math.abs(amount))
+            end
+        end
+    end)
+end)
+
+
+AddComponentPostInit("sanity", function(Sanity, inst)
+    inst:ListenForEvent("sanitydelta", function(inst, data)
+        if inst.components.sanity then
+            local amount = data.newpercent * inst.components.sanity.max - data.oldpercent * inst.components.sanity.max
+
+            if data.amount and math.abs(data.amount) < math.abs(amount) then
+                amount = data.amount
+            end
+
+            if amount == 0 then
+                return
+            end
+
+            if TUNING.SHOW_SANITY_INDICATORS and math.abs(amount) > TUNING.SHOW_NUMBERS_THRESHOLD then
+                local sanityindicator = GLOBAL.SpawnPrefab("sanind")
+                sanityindicator.Transform:SetPosition(inst.Transform:GetWorldPosition())
+                sanityindicator.isheal:set_local(false)
+                sanityindicator.isheal:set(amount >= 0)
+                sanityindicator.indicator:set_local(0)
+                sanityindicator.indicator:set(math.abs(amount))
             end
         end
     end)
