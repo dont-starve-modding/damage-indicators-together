@@ -62,6 +62,11 @@ TUNING.LABEL_Y_START_VELO = 0.05
 TUNING.LABEL_MIN_AMPLITUDE_X = 0.8
 TUNING.LABEL_MAX_AMPLITUDE_X = 1.6
 
+TUNING.ROCKET_M0 = 100              -- whole mass of the rocket
+TUNING.ROCKET_MF = 10               -- propellor mass
+TUNING.ROCKET_DM = 5                -- fuel mass emitted per time frame
+TUNING.ROCKET_FUEL_VELOCITY = 0.01  -- velocity of fuel while emitted
+
 TUNING.SCALE_WITH_DAMAGE = 1
 if (GetModConfigData("size_scale") == "off") then
     TUNING.SCALE_WITH_DAMAGE = 0 

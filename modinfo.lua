@@ -30,9 +30,10 @@ configuration_options =
         name = "display_mode",
         label = "Display Mode",
         options = {
-            { description = "Bouncy", data = "bouncy" },
             { description = "Waving", data = "waving" },
             { description = "Straight", data = "straight" },
+            { description = "Bouncy", data = "bouncy" },
+            { description = "Rocket", data = "rocket" },
         },
         default = "waving",
     },

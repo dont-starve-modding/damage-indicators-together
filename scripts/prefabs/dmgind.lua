@@ -59,12 +59,28 @@ local function CreateDamageIndicator(inst)
         local side = (math.random() * (TUNING.LABEL_MAX_AMPLITUDE_X - TUNING.LABEL_MIN_AMPLITUDE_X) + TUNING.LABEL_MIN_AMPLITUDE_X) * (math.random() >= 0.5 and -1 or 1)
         local dside = 0.0
         local ddside = 0.0
-        -------------------------------------
 
         if TUNING.DISPLAY_MODE == 'straight' then
-            side = side * 0.00
+            side = 0
         end
 
+        -------------------------------------
+
+        -- rocket mode ----------------------
+
+        if TUNING.DISPLAY_MODE == 'rocket' then
+            dy = 0
+            ddy = 0
+
+            side = 0
+            dside = 0 -- (math.random() - 0.5)*0.5
+        end
+
+        local mass = TUNING.ROCKET_M0
+        local lastsideoffset = 0
+        local newsideoffset = 0
+
+        -------------------------------------
 
         if TUNING.DISPLAY_MODE == 'bouncy' then
             -- bounce around mode ---------------
@@ -107,6 +123,27 @@ local function CreateDamageIndicator(inst)
                 ddside = 0
                 dside = dside + ddside
                 side = side + dside
+                --------------------------------------
+            end
+
+            if TUNING.DISPLAY_MODE == 'rocket' then
+                -- rocket mode -----------------------
+                -- see https://en.wikipedia.org/wiki/Tsiolkovsky_rocket_equation
+
+                ddy = (TUNING.ROCKET_FUEL_VELOCITY * TUNING.ROCKET_DM) / mass
+                dy = dy + ddy
+                y = y + dy
+
+                -- for 'shivering'
+                dside = dside
+                newsideoffset = (math.random() - 0.5) * math.max(0.05, 0.001/math.abs(dy))
+                side = side + dside - lastsideoffset + newsideoffset
+                lastsideoffset = newsideoffset
+
+                mass = mass - TUNING.ROCKET_DM
+                if mass < TUNING.ROCKET_MF then
+                    mass = TUNING.ROCKET_MF
+                end
                 --------------------------------------
             end
 
