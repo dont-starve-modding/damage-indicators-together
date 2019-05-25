@@ -27,36 +27,6 @@ configuration_options =
     },
 
     {
-        name = "show_hunger",
-        label = "Show Hunger Indicators",
-        options = {
-            { description = "On", data = "on" },
-            { description = "Off", data = "off" },
-        },
-        default = "off",
-    },
-    
-    {
-        name = "show_sanity",
-        label = "Show Sanity Indicators",
-        options = {
-            { description = "On", data = "on" },
-            { description = "Off", data = "off" },
-        },
-        default = "off",
-    },
-
-    {
-        name = "show_work",
-        label = "Show Work Indicators",
-        options = {
-            { description = "On", data = "on" },
-            { description = "Off", data = "off" },
-        },
-        default = "off",
-    },
-
-    {
         name = "display_mode",
         label = "Display Mode",
         options = {
@@ -112,4 +82,34 @@ configuration_options =
         },
         default = "default",
     }
+
+    {
+        name = "show_hunger",
+        label = "Show Hunger Indicators",
+        options = {
+            { description = "On", data = "on" },
+            { description = "Off", data = "off" },
+        },
+        default = "off",
+    },
+    
+    {
+        name = "show_sanity",
+        label = "Show Sanity Indicators",
+        options = {
+            { description = "On", data = "on" },
+            { description = "Off", data = "off" },
+        },
+        default = "off",
+    },
+
+    {
+        name = "show_work",
+        label = "Show Work Indicators",
+        options = {
+            { description = "On", data = "on" },
+            { description = "Off", data = "off" },
+        },
+        default = "off",
+    },
 }
