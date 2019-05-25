@@ -1,7 +1,7 @@
 name = "Damage Indicators Together"
 description = "Baaaaam Baam. Take that, nasty brute of hell!"
 author = "s1m13, ported by DarkXero"
-version = "0.10.0"
+version = "0.11.0"
 forumthread = "/topic/87910-damage-indicators-together/"
 api_version = 10
 dont_starve_compatible = false
@@ -39,6 +39,16 @@ configuration_options =
     {
         name = "show_sanity",
         label = "Show Sanity Indicators",
+        options = {
+            { description = "On", data = "on" },
+            { description = "Off", data = "off" },
+        },
+        default = "off",
+    },
+
+    {
+        name = "show_work",
+        label = "Show Work Indicators",
         options = {
             { description = "On", data = "on" },
             { description = "Off", data = "off" },

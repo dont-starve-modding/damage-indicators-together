@@ -1,7 +1,8 @@
 PrefabFiles = {
     "dmgind",
     "hngind",
-    "sanind"
+    "sanind",
+    "wrkind"
 }
 
 
@@ -66,6 +67,11 @@ TUNING.SANITY_GAIN_COLOR = {
     b = 0.9
 }
 
+TUNING.WORK_COLOR = {
+    r = 0.9,
+    g = 0.9,
+    b = 1
+}
 
 TUNING.LABEL_Y_START = 4
 
@@ -95,6 +101,7 @@ end
 
 TUNING.SHOW_HUNGER_INDICATORS = GetModConfigData("show_hunger") == "on"
 TUNING.SHOW_SANITY_INDICATORS = GetModConfigData("show_sanity") == "on"
+TUNING.SHOW_WORK_INDICATORS = GetModConfigData("show_work") == "on"
 
 AddComponentPostInit("health", function(Health, inst)
     inst:ListenForEvent("healthdelta", function(inst, data)
@@ -169,6 +176,25 @@ AddComponentPostInit("sanity", function(Sanity, inst)
                 sanityindicator.isheal:set(amount >= 0)
                 sanityindicator.indicator:set_local(0)
                 sanityindicator.indicator:set(math.abs(amount))
+            end
+        end
+    end)
+end)
+
+AddComponentPostInit("workable", function(Workable, inst)
+    inst:ListenForEvent("worked", function(inst, data)
+        if inst.components.workable then
+            local left = data.workleft
+
+            -- if left == 0 then
+            --     return
+            -- end
+
+            if TUNING.SHOW_WORK_INDICATORS and math.abs(amount) > TUNING.SHOW_NUMBERS_THRESHOLD then
+                local workindicator = GLOBAL.SpawnPrefab("wrkind")
+                workindicator.Transform:SetPosition(inst.Transform:GetWorldPosition())
+                workindicator.indicator:set_local(0)
+                workindicator.indicator:set(left)
             end
         end
     end)
