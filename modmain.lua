@@ -9,7 +9,7 @@ PrefabFiles = {
 ----------------------------------------------------
 ----------------- CONFIGURATION --------------------
 
-TUNING.SHOW_DAMAGE_ONLY = GetModConfigData("dmg_only") == "on" -- set to true, if you want to see damage only (no healing)
+TUNING.SHOW_DAMAGE_ONLY = GetModConfigData("dmg_only") == "on"
 
 TUNING.SHOW_NUMBERS_THRESHOLD = 0.1
 if GetModConfigData("amount_of_numbers") == "high" then

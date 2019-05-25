@@ -18,10 +18,10 @@ configuration_options =
 {
     {
         name = "dmg_only",
-        label = "Show Damage Only",
+        label = "Show Heal",
         options = {
-            { description = "On", data = "on" },
-            { description = "Off", data = "off" },
+            { description = "On", data = "off" },
+            { description = "Off", data = "on" },
         },
         default = "on",
     },
