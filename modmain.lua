@@ -2,6 +2,7 @@ PrefabFiles = {
     "dmgind",
     "hngind",
     "sanind",
+    "moiind",
     "bvnind",
     "wrkind"
 }
@@ -68,6 +69,17 @@ TUNING.SANITY_GAIN_COLOR = {
     b = 0.9
 }
 
+TUNING.MOISTURE_LOSE_COLOR = {
+    r = 0.9,
+    g = 0.9,
+    b = 0.3
+}
+TUNING.MOISTURE_GAIN_COLOR = {
+    r = 0.4,
+    g = 0.4,
+    b = 1
+}
+
 TUNING.WORK_COLOR = {
     r = 0.9,
     g = 0.9,
@@ -113,6 +125,7 @@ end
 
 TUNING.SHOW_HUNGER_INDICATORS = GetModConfigData("show_hunger") == "on"
 TUNING.SHOW_SANITY_INDICATORS = GetModConfigData("show_sanity") == "on"
+TUNING.SHOW_MOISTURE_INDICATORS = GetModConfigData("show_moisture") == "on"
 TUNING.SHOW_BEAVERNESS_INDICATORS = GetModConfigData("show_beaverness") == "on"
 TUNING.SHOW_WORK_INDICATORS = GetModConfigData("show_work") == "on"
 
@@ -190,6 +203,25 @@ AddComponentPostInit("sanity", function(Sanity, inst)
                 sanityindicator.indicator:set_local(0)
                 sanityindicator.indicator:set(math.abs(amount))
             end
+        end
+    end)
+end)
+
+AddComponentPostInit("moisture", function(Moisture, inst)
+    inst:ListenForEvent("moisturedelta", function(inst, data)
+        local amount = data.new - data.old
+
+        if amount == 0 then
+            return
+        end
+
+        if TUNING.SHOW_MOISTURE_INDICATORS and math.abs(amount) > TUNING.SHOW_NUMBERS_THRESHOLD then
+            local moistureindicator = GLOBAL.SpawnPrefab("moiind")
+            moistureindicator.Transform:SetPosition(inst.Transform:GetWorldPosition())
+            moistureindicator.isheal:set_local(false)
+            moistureindicator.isheal:set(amount >= 0)
+            moistureindicator.indicator:set_local(0)
+            moistureindicator.indicator:set(math.abs(amount))
         end
     end)
 end)
