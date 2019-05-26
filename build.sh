@@ -3,7 +3,7 @@ rm -r build/
 
 mkdir -p build/scripts
 
-echo "copying..."
+echo "copying files and scripts..."
 cp -r scripts/* build/scripts/
 cp CONTRIBUTORS build/
 cp damageindicators.* build/
