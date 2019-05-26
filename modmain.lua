@@ -4,7 +4,8 @@ PrefabFiles = {
     "sanind",
     "moiind",
     "bvnind",
-    "wrkind"
+    "wrkind",
+    "fulind"
 }
 
 
@@ -18,7 +19,7 @@ if GetModConfigData("amount_of_numbers") == "high" then
     TUNING.SHOW_NUMBERS_THRESHOLD = 0.001
 end
 if GetModConfigData("amount_of_numbers") == "low" then
-    TUNING.SHOW_NUMBERS_THRESHOLD = 0.99
+    TUNING.SHOW_NUMBERS_THRESHOLD = 0.999
 end
 
 TUNING.SHOW_HUNGER_NUMBERS_THRESHOLD = 0
@@ -80,12 +81,6 @@ TUNING.MOISTURE_GAIN_COLOR = {
     b = 1
 }
 
-TUNING.WORK_COLOR = {
-    r = 0.9,
-    g = 0.9,
-    b = 1
-}
-
 TUNING.BEAVERNESS_GAIN_COLOR = {
     r = 0.8,
     g = 0.8,
@@ -95,6 +90,23 @@ TUNING.BEAVERNESS_LOSE_COLOR = {
     r = 0.8,
     g = 0.8,
     b = 0.8
+}
+
+TUNING.WORK_COLOR = {
+    r = 0.9,
+    g = 0.9,
+    b = 1
+}
+
+TUNING.FUELD_GAIN_COLOR = {
+    r = 1,
+    g = 1,
+    b = 0
+}
+TUNING.FUELD_LOSE_COLOR = {
+    r = 1,
+    g = 1,
+    b = 0
 }
 
 TUNING.LABEL_Y_START = 4
@@ -128,6 +140,7 @@ TUNING.SHOW_SANITY_INDICATORS = GetModConfigData("show_sanity") == "on"
 TUNING.SHOW_MOISTURE_INDICATORS = GetModConfigData("show_moisture") == "on"
 TUNING.SHOW_BEAVERNESS_INDICATORS = GetModConfigData("show_beaverness") == "on"
 TUNING.SHOW_WORK_INDICATORS = GetModConfigData("show_work") == "on"
+TUNING.SHOW_FUELED_INDICATORS = GetModConfigData("show_fueled") == "on"
 
 AddComponentPostInit("health", function(Health, inst)
     inst:ListenForEvent("healthdelta", function(inst, data)
@@ -268,4 +281,36 @@ AddComponentPostInit("workable", function(Workable, inst)
             end
         end
     end)
+end)
+
+
+AddComponentPostInit("fueled", function(Fueled, inst)
+    if TUNING.SHOW_FUELED_INDICATORS and inst.components.fueled.fueltype == "BURNABLE" then -- "BURNABLE" from FUELTYPE in constants.lua
+
+        -- overwrite DoDelta-Function from component fueled
+        -- DoDelta in vanilla does not provide oldpercent :(
+        local old_DoDelta = inst.components.fueled.DoDelta
+        inst.components.fueled.DoDelta = function(amount, doer)
+            local oldpercent = inst.components.fueled:GetPercent()
+            old_DoDelta(amount, doer)
+            inst:PushEvent("di_percentusedchange", { newpercent = inst.components.fueled:GetPercent(), oldpercent = oldpercent })
+        end
+
+        inst:ListenForEvent("di_percentusedchange", function(inst, data)
+            local percent = 100 * (data.newpercent - data.oldpercent)
+
+            if percent == 0 then
+                return
+            end
+
+            if math.abs(percent) > TUNING.SHOW_NUMBERS_THRESHOLD * 10 then -- show less numbers
+                local fueledindicator = GLOBAL.SpawnPrefab("fulind")
+                fueledindicator.Transform:SetPosition(inst.Transform:GetWorldPosition())
+                fueledindicator.isheal:set_local(false)
+                fueledindicator.isheal:set(percent > 0)
+                fueledindicator.indicator:set_local(0)
+                fueledindicator.indicator:set(math.abs(percent))
+            end
+        end)
+    end
 end)

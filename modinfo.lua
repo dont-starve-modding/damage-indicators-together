@@ -133,4 +133,14 @@ configuration_options =
         default = "off",
     },
 
+    {
+        name = "show_fueled",
+        label = "Show Fueled Indicators",
+        options = {
+            { description = "On", data = "on" },
+            { description = "Off", data = "off" },
+        },
+        default = "off",
+    },
+
 }
