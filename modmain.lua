@@ -267,7 +267,7 @@ end)
 AddComponentPostInit("workable", function(Workable, inst)
     inst:ListenForEvent("worked", function(inst, data)
         if inst.components.workable then
-            local left = data.workleft
+            local amount = data.workleft
 
             -- if left == 0 then
             --     return
@@ -277,7 +277,7 @@ AddComponentPostInit("workable", function(Workable, inst)
                 local workindicator = GLOBAL.SpawnPrefab("wrkind")
                 workindicator.Transform:SetPosition(inst.Transform:GetWorldPosition())
                 workindicator.indicator:set_local(0)
-                workindicator.indicator:set(left)
+                workindicator.indicator:set(amount)
             end
         end
     end)
