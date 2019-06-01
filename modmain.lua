@@ -273,7 +273,7 @@ AddComponentPostInit("workable", function(Workable, inst)
             --     return
             -- end
 
-            if TUNING.SHOW_WORK_INDICATORS and math.abs(amount) > TUNING.SHOW_NUMBERS_THRESHOLD then
+            if TUNING.SHOW_WORK_INDICATORS and math.abs(amount) > TUNING.SHOW_NUMBERS_THRESHOLD and math.abs(amount) < 2048 then -- 2048 for int overflow prevention
                 local workindicator = GLOBAL.SpawnPrefab("wrkind")
                 workindicator.Transform:SetPosition(inst.Transform:GetWorldPosition())
                 workindicator.indicator:set_local(0)
