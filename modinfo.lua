@@ -1,4 +1,4 @@
-name = "Damage Indicators Together (Client only)"
+name = "Damage Indicators Together"
 description = "Baaaaam Baam. Take that, nasty brute of hell!"
 author = "s1m13, ported by DarkXero"
 version = "0.13.2"
@@ -7,10 +7,10 @@ api_version = 10
 dont_starve_compatible = false
 reign_of_giants_compatible = false
 dst_compatible = true
-icon_atlas = "clientdamageindicators.xml"
-icon = "clientdamageindicators.tex"
-all_clients_require_mod = false
-client_only_mod = true
+icon_atlas = "damageindicators.xml"
+icon = "damageindicators.tex"
+all_clients_require_mod = true
+client_only_mod = false
 server_filter_tags = { "damage indicators", "floating numbers" }
 
 
