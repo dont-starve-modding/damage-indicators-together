@@ -4,11 +4,11 @@ local function CreateDamageIndicator(inst)
 
     local label = inst.entity:AddLabel()
 
-    -- size = 0.5+ln(x)/9+x*x/2500
-    -- Which leads to nearly f(0) = 0.5, f(5) = 1, f(100) = 5
-    -- This means, lower numbers are half that small than numbers around 5
-    -- and 100 damage or heal is 5 times as big as a damage of 5
-    local size = (0.5+(math.log(absAmount+1))/9+(absAmount*absAmount)/2500);
+    -- size = 0.5+ln(x)/9+x*x/20000
+    -- Which leads to nearly f(0) = 0.5, f(7) = 1, f(280) = 5
+    -- This means, lower numbers are half that small than numbers around 7
+    -- and 280 damage or heal is 5 times as big as a damage of 7
+    local size = (0.5+(math.log(absAmount+1))/4+(absAmount*absAmount)/20000);
     if TUNING.SCALE_WITH_DAMAGE == 0 then
         size = 1
     end 
