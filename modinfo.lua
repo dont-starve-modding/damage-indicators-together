@@ -19,6 +19,7 @@ configuration_options =
     {
         name = "dmg_only",
         label = "Show Heal",
+        hover = "Show green numbers when a player or mob is healed.",
         options = {
             { description = "On", data = "off" },
             { description = "Off", data = "on" },
@@ -29,6 +30,7 @@ configuration_options =
     {
         name = "display_mode",
         label = "Display Mode",
+        hover = "Decide how the numbers are moving.",
         options = {
             { description = "Waving", data = "waving" },
             { description = "Straight", data = "straight" },
@@ -42,6 +44,7 @@ configuration_options =
     {
         name = "amount_of_numbers",
         label = "Amount of Numbers",
+        hover = "Choose whether all numbers are shown or ones larger than one.",
         options = {
             { description = "Low", data = "low" },
             { description = "Default", data = "default" },
@@ -53,6 +56,7 @@ configuration_options =
     {
         name = "show_decimal_points",
         label = "Show Decimal Points for",
+        hover = "Decide whether numbers are shown as '0' or '0.4'.",
         options = {
             { description = "No Numbers", data = "no" },
             { description = "Low Numbers", data = "low" },
@@ -76,6 +80,7 @@ configuration_options =
     {
         name = "size_scale",
         label = "Scale number size with damage",
+        hover = "Decide whether numbers should appear larger when the damage amound is higher.",
         options = {
             { description = "On", data = "default" },
             { description = "Off", data = "off" },
@@ -86,6 +91,7 @@ configuration_options =
     {
         name = "show_hunger",
         label = "Show Hunger Indicators",
+        hover = "Show numbers on changing hunger. (+beefelo hunger, +penguin hunger)",
         options = {
             { description = "On", data = "on" },
             { description = "Off", data = "off" },
@@ -96,6 +102,7 @@ configuration_options =
     {
         name = "show_sanity",
         label = "Show Sanity Indicators",
+        hover = "Show numbers on any changing sanity.",
         options = {
             { description = "On", data = "on" },
             { description = "Off", data = "off" },
@@ -106,6 +113,7 @@ configuration_options =
     {
         name = "show_moisture",
         label = "Show Wetness Indicators",
+        hover = "Show numbers on any changing wetness/moisture. Be aware that small changes over time will not always be shown. Change 'Amount of numbers' for that.",
         options = {
             { description = "On", data = "on" },
             { description = "Off", data = "off" },
@@ -116,6 +124,7 @@ configuration_options =
     {
         name = "show_beaverness",
         label = "Show Beaverness Indicators",
+        hover = "Show numbers on changes of Woodies beaverness scale while chopping trees.",
         options = {
             { description = "On", data = "on" },
             { description = "Off", data = "off" },
@@ -126,6 +135,7 @@ configuration_options =
     {
         name = "show_work",
         label = "Show Work Indicators",
+        hover = "Show numbers on any change while working. This affects trees, boulders, hammering structures etc.",
         options = {
             { description = "On", data = "on" },
             { description = "Off", data = "off" },
@@ -136,6 +146,7 @@ configuration_options =
     {
         name = "show_fueled",
         label = "Show Fueled Indicators",
+        hover = "Show numbers on any change of fuels in firepits and so on.",
         options = {
             { description = "On", data = "on" },
             { description = "Off", data = "off" },
