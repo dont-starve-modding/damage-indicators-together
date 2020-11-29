@@ -89,6 +89,18 @@ configuration_options =
     },
 
     {
+        name = "number_duration",
+        label = "Show numbers a shorter time",
+        hover = "Decide whether numbers should be visible for a shorter or longer duration.",
+        options = {
+            { description = "Longer", data = "long" },
+            { description = "Default", data = "default" },
+            { description = "Shorter", data = "short" },
+        },
+        default = "default",
+    },
+
+    {
         name = "show_hunger",
         label = "Show Hunger Indicators",
         hover = "Show numbers on changing hunger. (+beefelo hunger, +penguin hunger)",

@@ -132,7 +132,15 @@ TUNING.ROCKET_FUEL_VELOCITY = 0.01  -- velocity of fuel while emitted
 
 TUNING.SCALE_WITH_DAMAGE = 1
 if (GetModConfigData("size_scale") == "off") then
-    TUNING.SCALE_WITH_DAMAGE = 0 
+    TUNING.SCALE_WITH_DAMAGE = 0
+end
+
+if (GetModConfigData("number_duration") == "short") then
+    TUNING.LABEL_TIME = 0.5
+end
+
+if (GetModConfigData("number_duration") == "long") then
+    TUNING.LABEL_TIME = 1.5
 end
 
 TUNING.SHOW_HUNGER_INDICATORS = GetModConfigData("show_hunger") == "on"
